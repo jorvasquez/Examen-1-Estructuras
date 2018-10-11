@@ -1,0 +1,55 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+void MainWindow::on_disPres_clicked()
+{
+    ui->lineDec->setText("Hello Word");
+    ui->lineBin->setText(ui->lineDec->text());
+
+}
+
+void MainWindow::on_aumPres_clicked()
+{
+    ui->lineDec->setText("Hello Word");
+    ui->lineBin->setText(ui->lineDec->text());
+}
+
+void MainWindow::on_convBin_clicked()
+{
+    ui->lineBin->setText(ui->lineDec->text());
+}
+
+void MainWindow::on_convDec_clicked()
+{
+
+    ListaDobleCircular<char> hola=construirListaDec(ui->lineDec->text());
+    qDebug() << *hola.getDatoNodoActual();
+
+
+}
+
+
+ListaDobleCircular<char>  MainWindow::construirListaDec(QString numeroDecimal){
+    ListaDobleCircular<char> lista(0);
+    for(int n=0; n<numeroDecimal.length();n++){
+        char hola = numeroDecimal[n].toLatin1();
+        lista.agregarSiguiente(&hola);
+        lista.avanzarEnLista();
+
+    }
+
+    return lista;
+}
+
+
